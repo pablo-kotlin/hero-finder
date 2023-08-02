@@ -3,7 +3,6 @@ package com.project.marvelsuperheroes.data.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.play.core.integrity.e
 import com.project.marvelsuperheroes.data.Resource
 import com.project.marvelsuperheroes.data.api.ApiService
 import com.project.marvelsuperheroes.data.model.ComicEvent
