@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MarvelSuperheroes" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:fontFamily">@font/teko_light</item>
+    </style>
+
+    <style name="Theme.MarvelSuperheroes" parent="Base.Theme.MarvelSuperheroes" />
+</resources>
