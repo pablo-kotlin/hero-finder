@@ -13,6 +13,7 @@ import com.project.marvelsuperheroes.R
 import com.project.marvelsuperheroes.data.repository.FirebaseRepositoryImpl
 import com.project.marvelsuperheroes.databinding.ActivityLoginBinding
 import com.project.marvelsuperheroes.ui.viewmodel.LoginViewModel
+import com.project.marvelsuperheroes.utils.showErrorDialog
 
 class LoginActivity : AppCompatActivity() {
 
@@ -68,11 +69,9 @@ class LoginActivity : AppCompatActivity() {
             viewModel.signIn(email, password).addOnCompleteListener(this) { task ->
                 hideProgressBar()
                 if (task.isSuccessful) {
-                    // Sign in success
                     val user = FirebaseAuth.getInstance().currentUser
                     updateUI(user)
                 } else {
-                    // If sign in fails, display a message to the user.
                     task.exception?.message?.let {
                         Toast.makeText(baseContext, it, Toast.LENGTH_SHORT).show()
                     } ?: run {
@@ -84,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             hideProgressBar()
-            Toast.makeText(baseContext, "Invalid email or password.", Toast.LENGTH_SHORT).show()
+            showErrorDialog("Invalid email or password", applicationContext)
         }
     }
 
@@ -98,27 +97,20 @@ class LoginActivity : AppCompatActivity() {
             viewModel.createUser(email, password).addOnCompleteListener(this) { task ->
                 hideProgressBar()
                 if (task.isSuccessful) {
-                    // User creation success, update UI with the signed-in user's information
                     val user = FirebaseAuth.getInstance().currentUser
                     updateUI(user)
                 } else {
-                    // If sign up fails, display a message to the user.
                     task.exception?.message?.let {
                         Toast.makeText(baseContext, it, Toast.LENGTH_SHORT).show()
                     } ?: run {
-                        Toast.makeText(baseContext, "User creation failed.", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(baseContext, "User creation failed.", Toast.LENGTH_SHORT).show()
                     }
                     updateUI(null)
                 }
             }
         } else {
             hideProgressBar()
-            Toast.makeText(
-                baseContext,
-                "Invalid email, password, or password confirmation.",
-                Toast.LENGTH_SHORT
-            ).show()
+            showErrorDialog("Invalid email or password", applicationContext)
         }
     }
 

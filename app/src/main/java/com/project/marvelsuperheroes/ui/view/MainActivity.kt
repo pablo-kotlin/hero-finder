@@ -19,6 +19,7 @@ import com.project.marvelsuperheroes.ui.adapters.OnSuperheroClickListener
 import com.project.marvelsuperheroes.ui.adapters.SuperheroAdapter
 import com.project.marvelsuperheroes.ui.viewmodel.SuperheroViewModel
 import com.project.marvelsuperheroes.ui.viewmodel.SuperheroViewModelFactory
+import com.project.marvelsuperheroes.utils.showErrorDialog
 
 class MainActivity : AppCompatActivity(), OnSuperheroClickListener {
 
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity(), OnSuperheroClickListener {
                     Resource.Status.ERROR -> {
                         Log.d("MainActivity", "Error: ${resource.message}")
                         hideProgressBar()
+                        showErrorDialog("An unknown error occurred.", applicationContext)
                     }
 
                     Resource.Status.LOADING -> {

@@ -16,7 +16,8 @@ class LoginViewModel(private val repository: FirebaseRepository) : ViewModel() {
     }
 
     fun isUserNameValid(username: String): Boolean {
-        return username.isNotEmpty()
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return username.matches(emailPattern.toRegex())
     }
 
     fun isPasswordValid(password: String): Boolean {

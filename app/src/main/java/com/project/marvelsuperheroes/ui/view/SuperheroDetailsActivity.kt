@@ -2,6 +2,7 @@ package com.project.marvelsuperheroes.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +19,7 @@ import com.project.marvelsuperheroes.ui.viewmodel.ComicEventViewModel
 import com.project.marvelsuperheroes.ui.viewmodel.ComicEventViewModelFactory
 import com.project.marvelsuperheroes.ui.viewmodel.SuperheroViewModel
 import com.project.marvelsuperheroes.ui.viewmodel.SuperheroViewModelFactory
+import com.project.marvelsuperheroes.utils.showErrorDialog
 
 class SuperheroDetailsActivity : AppCompatActivity() {
 
@@ -82,6 +84,7 @@ class SuperheroDetailsActivity : AppCompatActivity() {
         viewModelComicEvent.getComicsByCharacterId(superheroId!!).observe(this) { resource ->
             when (resource.status) {
                 Resource.Status.SUCCESS -> {
+                    Log.d("SuperheroDetailsActivity", "Comic: ${resource.data}")
                     hideProgressBar()
                     resource.data?.let {
                         comicEvents = it
@@ -90,10 +93,13 @@ class SuperheroDetailsActivity : AppCompatActivity() {
                 }
 
                 Resource.Status.ERROR -> {
+                    Log.d("MainActivity", "Error: ${resource.message}")
                     hideProgressBar()
+                    showErrorDialog("An unknown error occurred.", applicationContext)
                 }
 
                 Resource.Status.LOADING -> {
+                    Log.d("SuperheroDetailsActivity", "Loading...")
                     showProgressBar()
                 }
             }
@@ -112,6 +118,7 @@ class SuperheroDetailsActivity : AppCompatActivity() {
             viewModelComicEvent.getEventsByCharacterId(superheroId!!).observe(this) { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
+                        Log.d("SuperheroDetailsActivity", "Event: ${resource.data}")
                         hideProgressBar()
                         resource.data?.let {
                             comicEvents = it
@@ -120,10 +127,13 @@ class SuperheroDetailsActivity : AppCompatActivity() {
                     }
 
                     Resource.Status.ERROR -> {
+                        Log.d("MainActivity", "Error: ${resource.message}")
                         hideProgressBar()
+                        showErrorDialog("An unknown error occurred.", applicationContext)
                     }
 
                     Resource.Status.LOADING -> {
+                        Log.d("SuperheroDetailsActivity", "Loading...")
                         showProgressBar()
                     }
                 }

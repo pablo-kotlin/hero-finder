@@ -16,4 +16,3 @@ class SuperheroViewModel(private val repository: SuperheroRepository): ViewModel
         return repository.getSuperheroById(superheroId)
     }
 }
-

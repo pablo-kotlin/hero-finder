@@ -1,7 +1,9 @@
 package com.project.marvelsuperheroes.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.play.core.integrity.e
 import com.project.marvelsuperheroes.data.Resource
 import com.project.marvelsuperheroes.data.api.ApiService
 import com.project.marvelsuperheroes.data.model.ComicEvent
@@ -34,7 +36,7 @@ class ComicEventRepositoryImpl(
                         val comics = apiResponse.data.results
                         result.postValue(Resource.success(comics))
                     } else {
-                        // Maneja el error o lanza una excepción
+                        Log.e("ComicEventRepository", "Error: ${response.errorBody()}")
                     }
                 } else {
                     result.postValue(Resource.error("Error: ${response.message()}", null))
@@ -62,7 +64,7 @@ class ComicEventRepositoryImpl(
                         val events = apiResponse.data.results
                         result.postValue(Resource.success(events))
                     } else {
-                        // Maneja el error o lanza una excepción
+                        Log.e("ComicEventRepository", "Error: ${response.errorBody()}")
                     }
                 } else {
                     result.postValue(Resource.error("Error: ${response.message()}", null))

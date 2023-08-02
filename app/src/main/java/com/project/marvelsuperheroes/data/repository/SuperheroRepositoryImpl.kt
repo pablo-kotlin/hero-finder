@@ -1,5 +1,6 @@
 package com.project.marvelsuperheroes.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.project.marvelsuperheroes.data.Resource
@@ -41,7 +42,7 @@ class SuperheroRepositoryImpl(
                         val comics = apiResponse.data.results
                         result.postValue(Resource.success(comics))
                     } else {
-                        // Maneja el error o lanza una excepción
+                        Log.e("SuperheroRepository", "Error: ${response.errorBody()}")
                     }
                 } else {
                     result.postValue(Resource.error("Error: ${response.message()}", null))
@@ -68,7 +69,7 @@ class SuperheroRepositoryImpl(
                         val superhero = apiResponse.data.results[0]
                         result.postValue(Resource.success(superhero))
                     } else {
-                        // Maneja el error o lanza una excepción
+                        Log.e("SuperheroRepository", "Error: ${response.errorBody()}")
                     }
                 } else {
                     result.postValue(Resource.error("Error: ${response.message()}", null))
@@ -80,5 +81,3 @@ class SuperheroRepositoryImpl(
         return result
     }
 }
-
-
